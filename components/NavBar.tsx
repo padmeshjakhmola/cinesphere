@@ -12,12 +12,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import MovieForm from "./MovieForm";
-import { Button } from "./ui/button";
 
 const allHeadings: Heading[] = [
   { text: "Home", link: "/" },
   { text: "Series", link: "/series" },
-  { text: "Movies", link: "/movies" },
+  { text: "Movies", link: "/movie" },
 ];
 
 const NavBar = () => {

@@ -1,6 +1,12 @@
+import MovieList from "@/components/MovieList";
+import movies from "@/dummydata";
 
 export default function Home() {
-  return <>
-  {/* <p>Home</p> */}
-  </>;
+  return (
+    <>
+      <div className="py-10">
+        <MovieList data={movies} />
+      </div>
+    </>
+  );
 }
