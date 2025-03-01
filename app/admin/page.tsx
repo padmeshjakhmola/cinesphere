@@ -1,79 +1,156 @@
 "use client";
 
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import NavBar from "@/components/NavBar";
-import { Button } from "@/components/ui/button";
 import s3 from "@/utils/aws";
 import config from "@/lib/config";
 
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+const formSchema = z.object({
+  name: z.string().min(1).max(50),
+  year: z.string().min(1).max(50),
+  image: z.instanceof(File, { message: "Image file is required" }),
+  video: z.instanceof(File, { message: "Video file is required" }),
+});
+
 const Page: React.FC = () => {
-  const [poster, setPoster] = useState<File | null>(null);
-  const [video, setVideo] = useState<File | null>(null);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      year: "",
+    },
+  });
 
-  const fileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const file = e.target.files[0];
-
-    console.log("File:", file);
-
-    if (e.target.id === "picture") {
-      setPoster(file);
-      console.log("Picture:", file);
-    } else if (e.target.id === "video") {
-      setVideo(file);
-      console.log("Video:", file);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!poster || !video) {
-      alert("Please upload both a poster and a video.");
-      return;
-    }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // console.log("rrrrrrrrrrrrrrrr", values);
 
     const formData = new FormData();
-    formData.append("image", poster);
-    formData.append("video", video);
+    formData.append("name", values.name);
+    formData.append("year", values.year);
+    formData.append("image", values.image);
+    formData.append("video", values.video);
 
-    const response = await fetch("/api/s3-upload", {
-      method: "POST",
-      body: formData,
-    });
-    
-    const result = await response.json();
-    console.log("result:", result);
-  };
+    try {
+      const response = await fetch("/api/s3-upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      console.log("Upload result:", result);
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
+  }
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen">
-        <h1 className="py-4">Upload File</h1>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="picture">Poster</Label>
-          <Input
-            id="picture"
-            type="file"
-            onChange={fileSelect}
-            accept="image/*"
-          />
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-[500px] max-w-md p-6 rounded-lg shadow-lg">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Movie Name"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="year"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Year</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Release Year"
+                        {...field}
+                        className="w-full"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Poster</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        className="w-full"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            form.setValue("image", file);
+                          }
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="video"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Video</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="file"
+                        accept="video/*"
+                        className="w-full"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            form.setValue("video", file);
+                          }
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Submit
+              </Button>
+            </form>
+          </Form>
         </div>
-        <h1 className="py-4 pt-6">Upload Video</h1>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="picture">Video</Label>
-          <Input
-            id="video"
-            type="file"
-            onChange={fileSelect}
-            accept="video/*"
-          />
-        </div>
-        <Button className="flex mt-8" onClick={handleSubmit}>
-          Submit
-        </Button>
       </div>
     </>
   );

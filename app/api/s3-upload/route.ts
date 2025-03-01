@@ -13,12 +13,21 @@ export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
 
+    const name = formData.get("name") as string | null;
+    const year = formData.get("year") as string | null;
     const image = formData.get("image") as File | null;
     const video = formData.get("video") as File | null;
 
+    if (!name || !year) {
+      return NextResponse.json(
+        { error: "Name and Year are required" },
+        { status: 400 }
+      );
+    }
+
     if (!image || !video) {
       return NextResponse.json(
-        { error: "Image file is required" },
+        { error: "Image and Video files are required" },
         { status: 400 }
       );
     }
@@ -29,11 +38,6 @@ export async function POST(req: NextRequest) {
     const videoBuffer = video
       ? Buffer.from(await video.arrayBuffer())
       : undefined;
-
-    const fileProps = {
-      image: image instanceof File ? image : null,
-      video: video instanceof File ? video : null,
-    };
 
     const uniqueFileNameforfetchingImage = uniqueFileName();
     const imageParams: AWSFILEUPLOAD = {
@@ -65,6 +69,8 @@ export async function POST(req: NextRequest) {
 
     try {
       await db.insert(movies).values({
+        moviename: name,
+        year,
         moviePoster: uniqueFileNameforfetchingImage,
         movieVideo: uniqueFileNameforfetchingVideo,
       });
