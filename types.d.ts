@@ -4,10 +4,12 @@ interface Heading {
 }
 
 interface Movie {
-  id: string;
-  name: string;
-  year: number;
-  poster: string;
+  id?: string;
+  name?: string;
+  year?: number;
+  poster?: string;
+  imageUrl: string;
+  videoUrl: string;
 }
 
 interface AWSFILEUPLOAD {

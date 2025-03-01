@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "image.tmdb.org",
       },
+      {
+        protocol: "https",
+        hostname: "my-cinesphere-bucket.s3.ap-south-1.amazonaws.com",
+      },
     ],
   },
 };

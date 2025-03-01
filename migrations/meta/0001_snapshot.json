@@ -1,6 +1,6 @@
 {
-  "id": "53de554a-56bb-482b-ad9d-b795abc4ea51",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "81a939fb-ac44-4b3e-aaf1-0c9c6906e2ea",
+  "prevId": "53de554a-56bb-482b-ad9d-b795abc4ea51",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -19,13 +19,15 @@
           "name": "movie_name",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false,
+          "default": "'Movie'"
         },
         "year": {
           "name": "year",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false,
+          "default": "'2025'"
         },
         "movie_poster": {
           "name": "movie_poster",

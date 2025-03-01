@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface MovieListProps {
-  data: Movie[];
+  movies: Movie[];
 }
 
-const MovieList: React.FC<MovieListProps> = ({ data }) => {
+const MovieList: React.FC<MovieListProps> = ({ movies }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {data.map((movie) => (
+      {movies.map((movie) => (
         <div
           key={movie.id}
           className="flex flex-col items-center justify-center hover:cursor-pointer"
@@ -17,11 +17,12 @@ const MovieList: React.FC<MovieListProps> = ({ data }) => {
           <Link href={`/movie/${movie.id}`}>
             <div className="relative">
               <Image
-                src={movie.poster}
+                src={movie.imageUrl}
                 width={200}
                 height={300}
                 alt="movie_poster"
                 loading="lazy"
+                className="flex flex-1"
               />
               <Image
                 src="/icons/playbutton.svg"

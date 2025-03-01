@@ -5,8 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1740728929868,
-      "tag": "0000_lowly_lady_ursula",
+      "when": 1740834360871,
+      "tag": "0000_fearless_vindicator",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1740834861295,
+      "tag": "0001_silent_spectrum",
       "breakpoints": true
     }
   ]
