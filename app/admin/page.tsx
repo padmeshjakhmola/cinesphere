@@ -52,8 +52,8 @@ const Page: React.FC = () => {
         body: formData,
       });
 
-      // const result = await response.json();
-      // console.log("Upload result:", result);
+      const result = await response.json();
+      console.log("Upload result:", result);
     } catch (error) {
       console.error("Error uploading files:", error);
     }
