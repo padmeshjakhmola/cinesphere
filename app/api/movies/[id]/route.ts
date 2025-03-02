@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { db } from "@/database/drizzle";
 import { movies } from "@/database/schema";
 import { eq } from "drizzle-orm";
