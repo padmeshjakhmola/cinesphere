@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   return (
-    <main className="root-container">
+    <main>
       <NavBar />
       {children}
     </main>

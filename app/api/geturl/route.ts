@@ -1,13 +1,10 @@
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/database/drizzle";
 import { movies } from "@/database/schema";
 import config from "@/lib/config";
-import s3 from "@/utils/aws";
 import { signedUrl } from "@/lib/actions/sign";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const response = await db.select().from(movies);
 
   const movieUrls = await Promise.all(

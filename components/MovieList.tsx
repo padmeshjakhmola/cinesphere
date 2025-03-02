@@ -17,7 +17,7 @@ interface MovieListProps {
 
 const MovieList: React.FC<MovieListProps> = ({ movies }) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
       {movies.map((movie) => (
         <div
           key={movie.id}
@@ -38,7 +38,7 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
                 width={50}
                 height={50}
                 alt="playbutton"
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out hover:scale-125"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out hover:scale-125"
                 fetchPriority="high"
               />
             </div>

@@ -1,8 +1,6 @@
 "use client";
 
 import MovieList from "@/components/MovieList";
-import { error } from "console";
-// import movies from "@/dummydata";
 import { useEffect, useState } from "react";
 
 export default function Home() {

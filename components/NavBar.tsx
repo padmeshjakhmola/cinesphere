@@ -3,10 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -21,7 +19,7 @@ const allHeadings: Heading[] = [
 
 const NavBar = () => {
   return (
-    <header className="flex mx-6 gap-5 items-center justify-between">
+    <header className="mx-6 flex items-center justify-between gap-5">
       <Link href="/">
         <Image
           src="/images/logo.png"
@@ -31,7 +29,7 @@ const NavBar = () => {
           priority
         />
       </Link>
-      <ul className="flex flex-row gap-10 items-center justify-center font-semibold text-lg font-geist-mono">
+      <ul className="flex flex-row items-center justify-center gap-10 font-geist-mono text-lg font-semibold">
         {allHeadings.map((heading, key) => {
           return (
             <li key={key} className="cursor-pointer hover:underline">
@@ -42,7 +40,7 @@ const NavBar = () => {
       </ul>
       <Dialog>
         <DialogTrigger>
-          <h1 className="flex justify-center items-center gap-2 hover:underline">
+          <h1 className="flex items-center justify-center gap-2 hover:underline">
             Submit movie request?
             <Image
               src="/icons/external.svg"
@@ -56,7 +54,7 @@ const NavBar = () => {
           <DialogHeader>
             <DialogTitle>Submit the details</DialogTitle>
             <DialogDescription className="pb-2">
-              Submit the details of the movie you wan't to see next !!
+              Submit the details of the movie you wan{`&apost`}t to see next !!
             </DialogDescription>
             <MovieForm />
           </DialogHeader>

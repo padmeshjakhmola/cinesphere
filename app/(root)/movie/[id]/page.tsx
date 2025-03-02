@@ -83,7 +83,7 @@ const Page = () => {
       <video
         ref={videoRef}
         src={movie.movieVideo}
-        className="mt-4 w-full max-w-7xl aspect-video rounded-lg shadow-lg"
+        className="mt-4 aspect-video w-full max-w-7xl rounded-lg shadow-lg"
         controls
         onError={(e) => console.error("Video Error:", e)}
       />

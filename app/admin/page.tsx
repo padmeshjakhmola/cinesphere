@@ -1,10 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { Label } from "@/components/ui/label";
-import NavBar from "@/components/NavBar";
-import s3 from "@/utils/aws";
-import config from "@/lib/config";
+import React from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,8 +57,8 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-[500px] max-w-md p-6 rounded-lg shadow-lg">
+      <div className="flex h-screen items-center justify-center">
+        <div className="w-[500px] max-w-md rounded-lg p-6 shadow-lg">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -102,7 +98,7 @@ const Page: React.FC = () => {
               <FormField
                 control={form.control}
                 name="image"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Poster</FormLabel>
                     <FormControl>
@@ -125,7 +121,7 @@ const Page: React.FC = () => {
               <FormField
                 control={form.control}
                 name="video"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Video</FormLabel>
                     <FormControl>
