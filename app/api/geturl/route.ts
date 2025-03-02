@@ -5,13 +5,13 @@ import { db } from "@/database/drizzle";
 import { movies } from "@/database/schema";
 import config from "@/lib/config";
 import s3 from "@/utils/aws";
+import { signedUrl } from "@/lib/actions/sign";
 
 export async function GET(req: NextRequest) {
   const response = await db.select().from(movies);
 
   const movieUrls = await Promise.all(
     response.map(async (movie) => {
-      console.log("bbbbbbbbbbbbbbbbbbb", movie);
       const getObjectParamsofImage = {
         Bucket: config.env.awsBucketname,
         Key: movie.moviePoster,
@@ -23,12 +23,8 @@ export async function GET(req: NextRequest) {
       };
 
       const [imageUrl, videoUrl] = await Promise.all([
-        getSignedUrl(s3, new GetObjectCommand(getObjectParamsofImage), {
-          expiresIn: 3600,
-        }),
-        getSignedUrl(s3, new GetObjectCommand(getObjectParamsofVideo), {
-          expiresIn: 3600,
-        }),
+        signedUrl(getObjectParamsofImage),
+        signedUrl(getObjectParamsofVideo),
       ]);
 
       return {

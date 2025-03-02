@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "my-cinesphere-bucket.s3.ap-south-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "cinesphere-bucket.s3.ap-south-1.amazonaws.com",
+      },
     ],
   },
 };

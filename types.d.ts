@@ -3,14 +3,14 @@ interface Heading {
   link: string;
 }
 
-interface Movie {
-  id?: string;
-  name?: string;
-  year?: number;
-  poster?: string;
-  imageUrl: string;
-  videoUrl: string;
-}
+// interface Movie {
+//   id?: string;
+//   name?: string;
+//   year?: number;
+//   poster?: string;
+//   imageUrl: string;
+//   videoUrl: string;
+// }
 
 interface AWSFILEUPLOAD {
   Bucket: string;
@@ -19,3 +19,17 @@ interface AWSFILEUPLOAD {
   ContentType?: string;
   ACL?: string;
 }
+
+interface GetObjectParam {
+  Bucket: string;
+  Key: string;
+}
+
+
+  interface Movie {
+    id: string;
+    moviename: string;
+    year: string;
+    moviePoster: string;
+    movieVideo: string;
+  }

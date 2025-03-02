@@ -15,8 +15,6 @@ export default function Home() {
 
         const data = await response.json();
 
-        console.log("aaaaaaaaaaaaa", data);
-
         setMovies(data);
       } catch (error) {
         console.error("Error fetching movies:", error);
