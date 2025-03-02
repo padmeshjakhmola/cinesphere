@@ -2,6 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+interface Movie {
+  id?: string;
+  name?: string;
+  year?: number;
+  poster?: string;
+  imageUrl: string;
+  videoUrl: string;
+}
+
 interface MovieListProps {
   movies: Movie[];
 }
