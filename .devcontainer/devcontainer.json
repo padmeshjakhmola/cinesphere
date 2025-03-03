@@ -5,7 +5,8 @@
   "workspaceFolder": "/app",
   "postCreateCommand": "npm install",
   "customizations": {
-    "vscode": {      "extensions": [
+    "vscode": {
+      "extensions": [
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-typescript-next",
         "dbaeumer.vscode-eslint",
@@ -16,7 +17,8 @@
         "eamodio.gitlens",
         "PKief.material-icon-theme",
         "dsznajder.es7-react-js-snippets",
-        "mikestead.dotenv"
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker"
       ],
       "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
