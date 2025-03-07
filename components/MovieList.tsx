@@ -21,7 +21,7 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
       {movies.map((movie) => (
         <div
           key={movie.id}
-          className="flex flex-col items-center justify-center hover:cursor-pointer"
+          className="flex flex-col items-center justify-center transition-transform duration-300 ease-in-out hover:scale-105 hover:cursor-pointer"
         >
           <Link href={`/movie/${movie.id}`}>
             <div className="relative">
@@ -30,8 +30,9 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
                 width={200}
                 height={300}
                 alt="movie_poster"
-                loading="lazy"
-                className="flex flex-1"
+                // loading="lazy"
+                className="h-[300px] w-[200px] rounded-lg object-cover"
+                priority
               />
               <Image
                 src="/icons/playbutton.svg"
@@ -44,7 +45,7 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
             </div>
           </Link>
 
-          <div className="flex flex-col items-center justify-center text-xl">
+          <div className="flex flex-col items-center justify-center text-lg">
             <h1>{movie.name}</h1>
             <p>{movie.year}</p>
           </div>
