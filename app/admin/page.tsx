@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -76,6 +77,7 @@ const Page: React.FC = () => {
     <>
       <div className="flex h-screen items-center justify-center">
         <div className="w-[500px] max-w-md rounded-lg p-6 shadow-lg">
+          <FaExclamationTriangle className="mb-4 flex w-full items-center justify-center text-6xl text-red-500" />
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField

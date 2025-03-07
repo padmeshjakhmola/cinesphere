@@ -1,9 +1,12 @@
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
 const Page = () => {
   return (
-    <div>Page</div>
-  )
-}
+    <div className="flex h-screen items-center justify-center">
+      <Image src="/icons/404error.svg" alt="error" width={600} height={600} />
+    </div>
+  );
+};
 
-export default Page
+export default Page;
