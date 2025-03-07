@@ -33,10 +33,10 @@ const Page = () => {
         const urlArray: Movie[] = await getCdnUrl.json();
 
         const singleUrl = urlArray.find((item) => item.id === movieId);
-        if (!singleUrl) throw new Error("Movie not found in CDN data");
+        if (!singleUrl) console.error("Movie not found in CDN data");
 
-        const moviePosterUrl = `${config.env.awsCloudfront}/${singleUrl.moviePoster}`;
-        const movieVideoUrl = `${config.env.awsCloudfront}/${singleUrl.movieVideo}`;
+        const moviePosterUrl = `${config.env.awsCloudfront}/${singleUrl?.moviePoster}`;
+        const movieVideoUrl = `${config.env.awsCloudfront}/${singleUrl?.movieVideo}`;
 
         setImage(moviePosterUrl);
         setMovie(movieVideoUrl);

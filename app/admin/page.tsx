@@ -56,7 +56,10 @@ const Page: React.FC = () => {
       });
 
       const result = await response.json();
-      console.log("Upload result:", result);
+      console.log("Upload result:", result, result.status, response.status);
+      if (response.status === 500) {
+        return toast.error("Failed to Uploded");
+      }
       toast.success("Movie Uploded");
       router.replace("/");
     } catch (error) {
