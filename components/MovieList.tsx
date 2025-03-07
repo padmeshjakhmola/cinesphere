@@ -45,7 +45,7 @@ const handleDelete = async (movieId: string) => {
 
 const MovieList: React.FC<MovieListProps> = ({ movies }) => {
   return (
-    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
       {movies.map((movie) => (
         <div
           key={movie.id}
