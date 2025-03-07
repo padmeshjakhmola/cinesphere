@@ -13,8 +13,11 @@ import MovieForm from "./MovieForm";
 
 const allHeadings: Heading[] = [
   { text: "Home", link: "/" },
-  // { text: "Series", link: "/series" },
-  // { text: "Movies", link: "/movie" },
+  { text: "Series", link: "/series" },
+  { text: "Movies", link: "/movie" },
+  ...(process.env.NODE_ENV === "development"
+    ? [{ text: "Admin", link: "/admin" }]
+    : []),
 ];
 
 const NavBar = () => {

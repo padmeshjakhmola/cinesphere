@@ -1,6 +1,7 @@
 "use client";
 
 import MovieList from "@/components/MovieList";
+import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -27,7 +28,10 @@ export default function Home() {
         {movies.length > 0 ? (
           <MovieList movies={movies} />
         ) : (
-          <p>Loading movies...</p>
+          <p className="flex h-screen items-center justify-center text-5xl">
+            <LoaderCircle className="mr-2 size-20 animate-spin" />
+            Loading movies....
+          </p>
         )}
       </div>
     </>
