@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +16,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -25,6 +28,9 @@ const formSchema = z.object({
 });
 
 const Page: React.FC = () => {
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,6 +49,7 @@ const Page: React.FC = () => {
     formData.append("video", values.video);
 
     try {
+      setIsLoading(true);
       const response = await fetch("/api/s3-upload", {
         method: "POST",
         body: formData,
@@ -50,8 +57,15 @@ const Page: React.FC = () => {
 
       const result = await response.json();
       console.log("Upload result:", result);
+      toast.success("Movie Uploded");
+      router.replace("/");
     } catch (error) {
       console.error("Error uploading files:", error);
+
+      // ...
+      toast.error("Failed to upload please check console");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -127,7 +141,7 @@ const Page: React.FC = () => {
                     <FormControl>
                       <Input
                         type="file"
-                        accept="video/*"
+                        accept="file/*"
                         className="w-full"
                         onChange={(e) => {
                           const file = e.target.files?.[0];
@@ -141,9 +155,20 @@ const Page: React.FC = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Submit
-              </Button>
+              {isLoading ? (
+                <Button type="submit" className="w-full" disabled>
+                  Uploding
+                  <AiOutlineLoading3Quarters className="animate-spin" />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="w-full"
+                  onClick={() => toast.info("Uploading....")}
+                >
+                  Submit
+                </Button>
+              )}
             </form>
           </Form>
         </div>
