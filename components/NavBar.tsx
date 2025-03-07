@@ -22,12 +22,12 @@ const allHeadings: Heading[] = [
 
 const NavBar = () => {
   return (
-    <header className="mx-6 flex items-center justify-between gap-5">
+    <header className="mx-6 flex min-h-20 items-center justify-around gap-5">
       <Link href="/">
         <Image
           src="/images/logo.png"
-          width={80}
-          height={80}
+          width={160}
+          height={160}
           alt="logo"
           priority
         />
@@ -43,7 +43,7 @@ const NavBar = () => {
       </ul>
       <Dialog>
         <DialogTrigger>
-          <h1 className="flex items-center justify-center gap-2 hover:underline">
+          <h1 className="hidden items-center justify-center gap-2 hover:underline md:flex">
             Submit movie request?
             <Image
               src="/icons/external.svg"

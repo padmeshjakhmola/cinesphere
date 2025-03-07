@@ -55,6 +55,9 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        yellow: {
+          500: "#ffce4d",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

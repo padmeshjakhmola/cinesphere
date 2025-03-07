@@ -74,11 +74,11 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
             <Dialog>
               <DialogTrigger asChild>
                 <Button
-                  className="absolute right-1 top-2 cursor-pointer"
+                  className="absolute right-1 top-2 cursor-pointer rounded-lg border-none bg-yellow-500 hover:bg-amber-400"
                   variant="outline"
                   size="icon"
                 >
-                  <EllipsisVertical />
+                  <EllipsisVertical color="black" />
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
